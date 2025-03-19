@@ -1,0 +1,76 @@
+# 1
+movie <- c("The Avengers", "Harry Potter", "Home Alone", "Toy Story", "Frozen", "The Notebook", "Interstellar")
+movie
+
+# 2
+#my_rating <- c(4.5, 3.3, 4.2, 4.4, 3.9, NA, 4.8)
+my_rating <- c(4.5, 3.3, 4.2, 4.4, 3.9, 4, 4.8)
+my_rating
+
+# 3
+TA_rating <- c(4.3, NA, 3.8, 3, 2.8, NA, 1.6)
+TA_rating
+
+# 4
+#yeongryun_rating <- c(NA, NA, NA, NA, NA, NA, NA)
+#haeun_rating <- c(NA, NA, NA, NA, NA, NA, NA)
+#hyeon_rating <- c(NA, NA, NA, NA, NA, NA, NA)
+#jim_rating <- c(4.5, 3.9, 4.6, 3.7, 3.1, NA, 3.9)
+
+yeongryun_rating <- c(3, 3, 3, 3, 3, 3, 3)
+haeun_rating <- c(4, 4, 4, 4, 4, 4, 4)
+hyeon_rating <- c(5, 5, 5, 5, 5, 5, 5)
+jim_rating <- c(4.5, 3.9, 4.6, 3.7, 3.1, 3.2, 3.9)
+team_matrix <- matrix( c(yeongryun_rating, haeun_rating, hyeon_rating, jim_rating, my_rating), nrow = 5, byrow = TRUE)
+team_matrix
+
+# 5
+sum_vector <- rowSums(team_matrix)
+sum_vector
+stu_mean <- sum_vector / 7
+stu_mean
+
+# 6
+movie_sum <- colSums(team_matrix)
+movie_sum
+
+# 7
+team_matrix <- cbind(team_matrix, stu_mean)
+team_matrix
+
+# 8
+# When I put rbind to combine team_matrix and movie_sum, an error message occurs because the number of columns do not match
+team_matrix <- rbind(team_matrix, movie_sum)
+team_matrix
+
+# 9
+team_matrix[6,8] <- NA 
+team_matrix
+
+# 10
+student <- c("yeongryun", "haeun", "hyeon", "jim", "mark", "movie_sum")
+movies <- c(movie, "stu_mean")
+rownames(team_matrix) <- student
+colnames(team_matrix) <- movies
+team_matrix
+
+# 11
+load(url('https://github.com/hbchoi/SampleData/raw/master/country.RData'))
+str(country)
+head(country, 5)
+tail(country, 5)
+
+# 12
+unique(country$continent)
+country$continent <- factor(country$continent)
+country$continent
+sapply(country, class)
+
+# 13
+summary(country$continent)
+
+# 14
+levels(country$continent) <- c("AF", "AS", "EU", "NA", "OC", "SA")
+
+# 15
+
