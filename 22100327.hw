@@ -1,0 +1,105 @@
+#Q1
+movie <- c("Harry Potter", "Home Alone", "Toy Story", "Frozen", "The Notebook", "Interstellar")
+#Q2
+my_rating <- c(NA, 3.5, 2.5, 4.6, 4.6, 3.5) 
+#Q3  
+TA_rating <- c(4.3, NA, 3.8, 3.0, 2.8, NA, 1.6)
+#Q4
+first_rating <- c(1.0, 2.0, 3.0, 4.0, 3.8, 2.3, 4.1)
+second_rating <- c(2.0, 3.0, 4.2, 5.7, 4.7, 1.4, 4.1)
+third_rating <- c(NA, 2.0, 4.0, 1.2, 3.0, 2.3, 4.6)
+
+team_matrix <- matrix(c(TA_rating, my_rating, first_rating, second_rating, third_rating), nrow = 5, byrow = TRUE)
+team_matrix
+
+#Q5
+# NA 값을 0으로 가정한 새로운 행렬 생성 (원본 유지)
+team_matrix_no_na <- team_matrix
+team_matrix_no_na[is.na(team_matrix_no_na)] <- 0
+team_matrix_no_na
+
+
+#Q6
+movie_sum <- colSums(team_matrix_no_na)
+print(movie_sum)
+
+# 원본 team_matrix 확인 (NA 유지됨)
+print(team_matrix)
+
+#Q7
+team_matrix2 <- cbind(team_matrix, stu_mean)
+team_matrix2
+
+#Q8
+team_matrix_final <- rbind(team_matrix2, movie_sum)
+team_matrix_final
+
+#Q9
+team_matrix_final[6,8] <- NA
+team_matrix_final
+
+#Q10
+title <- c("Avengers", "HP","Home Alone", "T.S", "Frozen", "Notebook", "Interstellar")
+name <- c("p1","p2","p3","p4","p5","p6")
+
+colnames(team_matrix_final) <- title
+rownames(team_matrix_final) <- name
+
+team_matrix_final
+
+#Q11~16
+load(url('https://github.com/hbchoi/SampleData/raw/master/country.RData'))
+
+#Q11
+head(country)
+
+#Q12
+str(country)
+factor(country$continent)
+factor(country$country_name)
+factor(country$GDP)
+factor(country$population)
+factor(country$CO2)
+factor(country$life_expect)
+factor(country$battle_death)
+factor(country$child.per.woman)
+factor(country$programmable.aid)
+#level 이 10개 미만은 continent 밖에 없음
+#인터넷에 찾아보고 얻은 결과
+country$continent <- as.factor(country$continent)
+#결과 확인
+str(country)
+
+#Q13
+summary(country$continent)
+
+#Q14
+levels(country$continent) <- c("AF","AS","EU","NA","OC","SA")
+summary(country$continent)
+
+#Q15
+gdp_group <- mean(country$GDP)
+GDP_group <- country$GDP > gdp_group
+GDP_group2 <- as.factor(GDP_group)
+GDP_group2
+levels(GDP_group2) <- c("HIGH","Low")
+str(GDP_group2)
+#--------------------------
+other_mothod <- ifelse(country$GDP > gdp_group, "HIGH","LOW")
+other_mothod
+(other_mothod)
+
+table(other_mothod)
+
+#Q16
+
+# Find_continent 함수 정의
+Find_continent <- function(continent_code) {
+  return(country$continent == continent_code)
+}
+
+
+
+# 함수 실행 (샘플 결과와 동일한지 확인)
+Find_continent("AS")  # 아시아 국가가 TRUE, 나머지는 FALSE
+Find_continent("EU")  # 유럽 국가가 TRUE, 나머지는 FALSE
